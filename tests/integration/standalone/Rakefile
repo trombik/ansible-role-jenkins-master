@@ -6,20 +6,33 @@ require "tempfile"
 test_dir = Pathname.new(__FILE__).dirname
 role_dir = Pathname.new(test_dir).parent.parent.parent
 role_name = Pathname.new(role_dir).basename
+required_roles = %w[
+]
 
-task default: %w(test)
+def vagrant(cmd)
+  Bundler.with_clean_env do
+    sh "vagrant #{cmd}"
+  end
+end
+
+task default: %w[test]
 
 desc "run rspec"
 task test: [:clean, :prepare, :do_test, :ensure_clean] do
 end
 
 desc "clean"
-task clean: [:clean_vagrant, :clean_roles] do
+task clean: [:clean_vagrant, :clean_roles, :clean_role] do
 end
 
 desc "destroy vagrant nodes"
 task :clean_vagrant do
-  sh "vagrant destroy -f"
+  vagrant "destroy -f"
+end
+
+desc "rm roles/*"
+task :clean_role do
+  sh "rm -rf roles/*"
   sh "rm -f *.retry"
 end
 
@@ -34,22 +47,26 @@ end
 
 desc "clean up required roles"
 task :clean_roles do
-  sh "rm -rf roles/*"
+  required_roles.each do |r|
+    Dir.chdir("roles") do
+      sh "rm -rf #{r}"
+    end
+  end
 end
 
 desc "prepare role"
 task :prepare_role do
-  ignore_files = %w(vendor .kitchen .git tests spec)
-                 .map { |f| "#{role_name}/#{f}" }
+  ignore = %w[vendor .kitchen .git tests spec].map { |f| "#{role_name}/#{f}" }
   tmpfile = Tempfile.new(".tarignore")
-  tmpfile.write ignore_files.join("\n")
+  tmpfile.write ignore.join("\n")
   tmpfile.close
-  sh "tar -c -X #{tmpfile.path} -C #{role_dir.parent} -f - #{role_name} | tar -x -C #{test_dir}/roles -f -"
+  sh "tar -c -X #{tmpfile.path} -C #{role_dir.parent} -f - #{role_name} | " + "tar -x -C #{test_dir}/roles -f -"
+  # rubocop:enable Metrics/LineLength
 end
 
 desc "vagrant up"
 task :vagrant_up do
-  sh "vagrant up"
+  vagrant "up"
 end
 
 desc "do clean task even if it has been executed"
