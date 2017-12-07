@@ -1,3 +1,7 @@
+## Release 1.0.9
+
+* 094052e [bugfix] Update gemfile (#1)
+
 ## Release 1.0.8
 
 559c25f [bugfix] need to restart after applying the patch (#41)
