@@ -9,6 +9,6 @@
 
   pre_tasks:
   roles:
-    - reallyenglish.hosts
-    - reallyenglish.java
+    - trombik.hosts
+    - trombik.java
     - ansible-role-jenkins-master

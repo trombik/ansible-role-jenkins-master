@@ -2,7 +2,7 @@
 galaxy_info:
   author: Tomoyuki Sakurai
   description: Configures Jenkins master
-  company: Reallyenglish
+  company: N/A
   license: BSD
   min_ansible_version: 2.0
   platforms:
@@ -22,4 +22,4 @@ galaxy_info:
   galaxy_tags:
     - system
 dependencies:
-  - { role: reallyenglish.java }
+  - { role: trombik.java }

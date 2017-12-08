@@ -89,7 +89,7 @@ array of dictionaries for slave nodes
 
 ```yaml
 dependencies:
-  - { role: reallyenglish.java }
+  - { role: trombik.java }
 ```
 
 # Example Playbook
@@ -97,11 +97,11 @@ dependencies:
 ```yaml
 - hosts: localhost
   roles:
-    - role: reallyenglish.apt-repo
+    - role: trombik.apt-repo
       when: ansible_os_family == "Debian"
-    - role: reallyenglish.redhat-repo
+    - role: trombik.redhat-repo
       when: ansible_os_family == "RedHat"
-    - role: reallyenglish.java
+    - role: trombik.java
     - ansible-role-jenkins-master
   vars_files:
     - jenkins_master_ssh_private_key.yml
