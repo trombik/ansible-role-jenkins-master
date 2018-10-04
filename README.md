@@ -32,6 +32,7 @@ None
 | `jenkins_master_ssh_passphrase` | passphrase of ssh key | `""` |
 | `jenkins_master_ssh_private_key` | ssh private key | `""` |
 | `jenkins_master_nodes` | slave nodes (see below) | `[]` |
+| `jenkins_master_debug_log` | if `yes`, disable `no_log` in tasks, i.e. show sensitive information in log | `no` |
 
 ## `jenkins_master_nodes`
 array of dictionaries for slave nodes
