@@ -184,7 +184,7 @@ plugins.each do |p|
   end
 end
 
-describe command("java -jar #{cli} -s #{url} list-plugins") do
+describe command("java -jar #{cli} -auth admin:password -s #{url} list-plugins") do
   its(:exit_status) { should eq 0 }
   plugins.each do |p|
     its(:stdout) { should match(/^#{ p }\s+/) }
@@ -193,9 +193,8 @@ describe command("java -jar #{cli} -s #{url} list-plugins") do
 end
 
 describe command(
-  "java -jar #{cli} -s #{url} list-credentials\
-  'SystemCredentialsProvider::SystemContextResolver::jenkins'\
-   --username admin --password password"
+  "java -jar #{cli} -s #{url} -auth admin:password list-credentials\
+  'SystemCredentialsProvider::SystemContextResolver::jenkins'"
 ) do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match(/^[0-9a-f]+[-0-9a-f]+[0-9a-f]+\s+#{user}$/) }
@@ -207,8 +206,7 @@ end
 
 nodes.each do |node|
   describe command(
-    "java -jar #{cli} -s #{url} get-node #{node[:name]}\
-     --username admin --password password"
+    "java -jar #{cli} -s #{url} -auth admin:password get-node #{node[:name]}"
   ) do
     its(:exit_status) { should eq 0 }
     its(:stdout) { should match(%r{<name>#{node[:name]}</name>}) }
