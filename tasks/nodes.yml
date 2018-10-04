@@ -4,7 +4,7 @@
   failed_when: register_jenkins_master_nodes.rc not in [0, 3]
   changed_when: False
   with_items: "{{ jenkins_master_nodes }}"
-  always_run: yes
+  check_mode: no
   no_log: "{% if jenkins_master_debug_log %}no{% else %}yes{% endif %}"
 
 - name: Create nodes
