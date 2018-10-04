@@ -1,3 +1,12 @@
+## Release 1.1.0
+
+* 6115ea6 bugfix: update contacts
+* 86b913d bugfix: replace always_run with check_mode
+* 674cd33 bugfix: QA
+* 208d4ad feature: support FreeBSD 11.1 and Ubuntu 18.04
+* ec4a69f bugfix: use well-formed XML in a request
+* fdff923 update dependencies (#3)
+
 ## Release 1.0.9
 
 * 094052e [bugfix] Update gemfile (#1)
