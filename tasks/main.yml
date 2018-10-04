@@ -19,7 +19,7 @@
   retries: "{{ jenkins_master_connection_retries }}"
   delay: "{{ jenkins_master_connection_delay }}"
   changed_when: false
-  always_run: yes
+  check_mode: no
 
 - name: Download jenkins-cli
   get_url:
