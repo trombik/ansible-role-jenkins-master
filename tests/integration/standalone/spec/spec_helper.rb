@@ -19,7 +19,7 @@ ENV["LANG"] = "C"
 #
 # include the path of bin to vagrant
 #
-# rubocop:enable Metrics/LineLength
+
 vagrant_real_path = ""
 Bundler.with_clean_env do
   vagrant_real_path = File.dirname(`which vagrant`)
